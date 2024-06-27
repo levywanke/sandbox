@@ -76,6 +76,26 @@ CREATE TABLE IF NOT EXISTS events (
 )
 """)
 
+# Create fees table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS fees (
+    class_id INT,
+    fee_amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (class_id) REFERENCES grade(grade_id)
+)
+""")
+
+# Create payments table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    amount_paid DECIMAL(10, 2) NOT NULL,
+    payment_date DATE NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+)
+""")
+
 # Commit the changes
 connection.commit()
 

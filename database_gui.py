@@ -1,6 +1,21 @@
 import tkinter as tk
 from tkinter import messagebox
 import mysql.connector
+from mysql.connector import Error
+
+# Function to get a database connection
+def get_db_connection():
+    try:
+        connection = mysql.connector.connect(
+            host="localhost",
+            user="your_username",
+            password="your_password",
+            database="schooldb"
+        )
+        return connection
+    except Error as e:
+        messagebox.showerror("Connection Error", f"Error connecting to the database: {e}")
+        return None
 
 # Function to insert data into the students table
 def insert_student():
@@ -10,25 +25,27 @@ def insert_student():
     grade_id = entry_grade_id.get()
     
     if first_name and last_name and date_of_birth and grade_id:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="your_username",
-            password="your_password",
-            database="schooldb"
-        )
-        
-        cursor = connection.cursor()
-        cursor.execute("INSERT INTO students (first_name, last_name, date_of_birth, grade_id) VALUES (%s, %s, %s, %s)", 
-                       (first_name, last_name, date_of_birth, grade_id))
-        connection.commit()
-        cursor.close()
-        connection.close()
-        
-        messagebox.showinfo("Success", "Student data inserted successfully")
-        entry_first_name.delete(0, tk.END)
-        entry_last_name.delete(0, tk.END)
-        entry_dob.delete(0, tk.END)
-        entry_grade_id.delete(0, tk.END)
+        connection = get_db_connection()
+        if connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute(
+                    "INSERT INTO students (first_name, last_name, date_of_birth, grade_id) VALUES (%s, %s, %s, %s)", 
+                    (first_name, last_name, date_of_birth, grade_id)
+                )
+                connection.commit()
+                cursor.close()
+                connection.close()
+                
+                messagebox.showinfo("Success", "Student data inserted successfully")
+                entry_first_name.delete(0, tk.END)
+                entry_last_name.delete(0, tk.END)
+                entry_dob.delete(0, tk.END)
+                entry_grade_id.delete(0, tk.END)
+            except Error as e:
+                messagebox.showerror("Insert Error", f"Error inserting data: {e}")
+        else:
+            messagebox.showerror("Connection Error", "Unable to connect to the database")
     else:
         messagebox.showwarning("Input Error", "Please fill in all fields")
 
