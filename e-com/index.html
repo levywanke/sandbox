@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>commerce</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div id="top-header" class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i> <span id="user-phone"></span></a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> <span id="user-email"></span></a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> <span id="user-address"></span></a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+            </ul>
+        </div>
+
+        <div id="header" class="container">
+            <div class="row align-items-center"> <!-- Ensure elements are vertically centered -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="#" class="logo">
+                            <img src="./images/image.png" alt="image" style="max-width: 100%; max-height: 60px;"> <!-- Add max-height for better alignment -->
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form class="d-flex"> <!-- Add flex to the form for alignment -->
+                            <select class="input-select" id="category-select" style="height: 40px;">
+                                <option value="0">All Categories</option>
+                                <!-- Categories will be dynamically loaded here -->
+                            </select>
+                            <input class="input" placeholder="Search here" id="search-input" style="height: 40px;">
+                            <button class="search-btn" type="button" onclick="searchProducts()" style="height: 40px;">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="header-ctn d-flex justify-content-end align-items-center"> <!-- Align items to the right -->
+                        <div class="wishlist">
+                            <a href="#">
+                                <i class="fa fa-heart-o"></i>
+                                <span>Your Wishlist</span>
+                                <div class="qty" id="wishlist-qty">0</div>
+                            </a>
+                        </div>
+                        <div class="cart dropdown mx-3"> <!-- Add margin between wishlist and cart -->
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Your Cart</span>
+                                <div class="qty" id="cart-qty">0</div>
+                            </a>
+                            <div class="cart-dropdown">
+                                <div class="cart-list" id="cart-list">
+                                    <!-- Cart items will be dynamically loaded here -->
+                                </div>
+                                <div class="cart-summary" id="cart-summary">
+                                    <small>0 Item(s) selected</small>
+                                    <h5>SUBTOTAL: $0.00</h5>
+                                </div>
+                                <div class="cart-btns">
+                                    <a href="#">View Cart</a>
+                                    <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <main>
+        <section class="features container">
+                       <div class="features-container">
+                <div class="feature active">
+                    <img src="images/image.png" alt="User Accounts" class="feature-image"> <!-- Replace with your image path -->
+                    <h3>User Accounts</h3>
+                    <p>Create an account to manage your orders and save your favorite products.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/image.png" alt="Shopping Cart" class="feature-image"> <!-- Replace with your image path -->
+                    <h3>Shopping Cart</h3>
+                    <p>Easily add products to your cart and proceed to checkout.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/image.png" alt="Order Tracking" class="feature-image"> <!-- Replace with your image path -->
+                    <h3>Order Tracking</h3>
+                    <p>Track your orders in real-time from your account.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/image.png" alt="Discounts & Coupons" class="feature-image"> <!-- Replace with your image path -->
+                    <h3>Discounts & Coupons</h3>
+                    <p>Get exclusive discounts and coupons for your purchases.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/image.png" alt="Wishlist" class="feature-image"> <!-- Replace with your image path -->
+                    <h3>Wishlist</h3>
+                    <p>Save your favorite products to your wishlist for later.</p>
+                </div>
+                <div class="feature">
+                    <img src="images/image.png" alt="Customer Reviews" class="feature-image"> <!-- Replace with your image path -->
+                    <h3>Customer Reviews</h3>
+                    <p>Read reviews from other customers before making a purchase.</p>
+                </div>
+            </div>
+        </section>
+        
+        
+
+        <section class="products container">
+            <h2>Featured Products</h2>
+            <div id="product-list" class="product-grid">
+                <!-- Products will be dynamically loaded from the database here -->
+            </div>
+        </section>
+
+        <!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <div class="container">
+        <div class="newsletter text-center">
+            <h2 class="newsletter-title">Sign Up for the <strong>Newsletter</strong></h2>
+            <p>Stay updated with the latest products and exclusive offers.</p>
+            <div class="newsletter-input">
+                <input class="input" type="email" placeholder="Enter Your Email">
+                <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+            </div>
+            <ul class="newsletter-follow">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /NEWSLETTER -->
+
+    </main>
+    
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">About Us</h3>
+                            <p>Our dedication to quality, exceptional service, and innovation empowers you to discover products that elevate your lifestyle.</p>
+                            <ul class="footer-links">
+                                <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i></a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Categories</h3>
+                            <ul class="footer-links" id="footer-categories">
+                                <!-- Categories will be dynamically loaded here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Information</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Orders and Returns</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Service</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">View Cart</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                                <li><a href="#">Track My Order</a></li>
+                                <li><a href="#">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bottom footer -->
+        <div id="bottom-footer" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul class="footer-payments">
+                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                        </ul>
+                        <span class="copyright">
+                            <!-- Link back to this site cannot be removed -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /bottom footer -->
+    </footer>
+    <!-- /FOOTER -->
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/feature.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
